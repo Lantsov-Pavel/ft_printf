@@ -1,12 +1,18 @@
-#include <stdarg.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_choose_type.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: plantsov <plantsov@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/13 19:45:12 by plantsov          #+#    #+#             */
+/*   Updated: 2025/01/18 18:16:12 by plantsov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_puthex_fd(char *hex_form, size_t unum, int fd);
+#include "libftprintf.h"
 
-void	ft_print_ptr(va_list args, int fd)
+static void	ft_print_ptr(va_list args, int fd)
 {
 	size_t	ptr;
 
@@ -15,7 +21,7 @@ void	ft_print_ptr(va_list args, int fd)
 	ft_puthex_fd("0123456789abcdef", ptr, fd);
 }
 
-void	ft_print_chr(char c, va_list args, int fd)
+static void	ft_print_chr(char c, va_list args, int fd)
 {
 	if (c == 'c')
 	{
@@ -28,12 +34,12 @@ void	ft_print_chr(char c, va_list args, int fd)
 	}
 }
 
-void	ft_print_nbr(char c, va_list args, int fd)
+static void	ft_print_nbr(char c, va_list args, int fd)
 {
-	int		num;
 	unsigned int	unum;
-	size_t		hnum;
-	char		*hex_form;
+	size_t			hnum;
+	char			*hex_form;
+	int				num;
 
 	if (c == 'd' || c == 'i')
 	{
@@ -55,7 +61,7 @@ void	ft_print_nbr(char c, va_list args, int fd)
 	}
 }
 
-void	ft_print_str(va_list args, int fd)
+static void	ft_print_str(va_list args, int fd)
 {
 	char	*s;
 

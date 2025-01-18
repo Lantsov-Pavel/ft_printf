@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex_fd.c                                     :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plantsov <plantsov@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 17:16:03 by plantsov          #+#    #+#             */
-/*   Updated: 2025/01/14 17:32:47 by plantsov         ###   ########.fr       */
+/*   Created: 2025/01/18 17:58:24 by plantsov          #+#    #+#             */
+/*   Updated: 2025/01/18 17:58:58 by plantsov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-void	ft_puthex_fd(char *hex_form, size_t unum, int fd)
-{
-	if (unum >= 16)
-		ft_puthex_fd(hex_form, unum / 16, fd);
-	ft_putchar_fd(hex_form[unum % 16], fd); 
-}
+# include <stdarg.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+void	ft_choose_type(char c, va_list args);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_puthex_fd(char *hex_form, size_t unum, int fd);
+void	ft_putnbr_fd(int n, int fd);
+int		ft_printf(const char *input, ...);
+
+#endif
