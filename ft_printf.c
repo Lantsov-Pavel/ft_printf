@@ -10,26 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+
+static	int ft_choose_type(char c, va_list args, int *len)
+{
+	int	fd;
+
+	fd = 1;
+	if (c == 'd' || c == 'i' || c == 'u' || c == 'x' || c == 'X')
+		*len += ft_print_nbr(c, args, fd);
+	else if (c == 'c' || c == '%')
+		*len += ft_print_chr(c, args, fd);
+	else if (c == 's')
+		*len += ft_print_str(args, fd);
+	else if (c == 'p')
+		*len += ft_print_ptr(args, fd);
+	return(*len);
+}
 
 int	ft_printf(const char *input, ...)
 {
 	va_list	args;
+	int len;
 
+	len = 0;
 	va_start(args, input);
 	while (*input)
 	{
 		if (*input == '%')
 		{
 			input++;
-			ft_choose_type(*input, args);
+			len = ft_choose_type(*input, args, &len);
 		}
 		else
 		{
 			ft_putchar_fd(*input, 1);
+			len++;
 		}
 		input++;
 	}
 	va_end(args);
-	return (0);
+	return (len);
 }
