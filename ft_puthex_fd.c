@@ -18,7 +18,7 @@ int	ft_puthex_fd(char *hex_form, size_t unum, int fd)
 	
 	count = 0;
 	if (unum >= 16)
-		ft_puthex_fd(hex_form, unum / 16, fd);
+		count += ft_puthex_fd(hex_form, unum / 16, fd);
 	ft_putchar_fd(hex_form[unum % 16], fd);
 	count++;
 	return count;

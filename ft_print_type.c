@@ -17,10 +17,14 @@ int	ft_print_ptr(va_list args, int fd)
 	size_t	ptr;
 	int result;
 
-	result = 2;
 	ptr = (size_t)va_arg(args, void *);
+	if(!ptr)
+	{
+		ft_putstr_fd("(nil)",fd);
+		return (5);
+	}
 	ft_putstr_fd("0x", fd);
-	result += ft_puthex_fd("0123456789abcdef", ptr, fd);
+	result = 2 + ft_puthex_fd("0123456789abcdef", ptr, fd);
 	return (result);
 }
 
@@ -62,7 +66,14 @@ int	ft_print_str(va_list args, int fd)
 {
 	char	*s;
 	int result;
+
+	result = 0;
 	s = va_arg(args, char *);
+	if(!s)
+	{
+		ft_putstr_fd("(null)",fd);
+		return(5);
+	}
 	result = ft_strlen(s);
 	ft_putstr_fd(s, fd);
 	return (result);

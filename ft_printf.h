@@ -26,7 +26,7 @@ int     ft_print_chr(char c, va_list args, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 int     ft_puthex_fd(char *hex_form, size_t unum, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int	ft_putnbr_fd(int n, int fd);
 int	    ft_print_hex(char c, va_list args, int fd);
 size_t	ft_strlen(char *str);
 

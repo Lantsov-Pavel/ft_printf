@@ -12,13 +12,16 @@
 
 #include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int		ft_putnbr_fd(int n, int fd)
 {
 	char	c;
+	int 	count;
 
+	count = 0;
 	if (n == -2147483648)
 	{
 		write(fd, "-2147483648", 11);
+		return(11);
 	}
 	else
 	{
@@ -26,12 +29,13 @@ void	ft_putnbr_fd(int n, int fd)
 		{
 			write(fd, "-", 1);
 			n = -n;
+			count++;
 		}
 		if (n >= 10)
-		{
-			ft_putnbr_fd(n / 10, fd);
-		}
+			count += ft_putnbr_fd(n / 10, fd);
 		c = n % 10 + '0';
 		write(fd, &c, 1);
+		count++;
 	}
+	return(count);
 }
